@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Etch A Sketch</title>
+        <style>
+            div.cell {
+                border: 2px solid blue;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- https://www.theodinproject.com/lessons/foundations-etch-a-sketch -->
+        <button type="button" onClick="createGrid()">Create grid</button>
+
+        <main class="grid"></main>
+
+        <script>
+            let rowCount = 0;
+            let gridContainer = document.querySelector(".grid");
+
+            const defaultGrid = () => {
+               while (rowCount < 17) {
+                    let rowDiv = document.createElement("div");
+                    let colCount = 0;
+
+                    rowDiv.setAttribute("style", "display: flex;");
+
+                    while (colCount < 17) {
+                        let colDiv = document.createElement("div");
+
+                        colDiv.setAttribute("class", `cell`);
+                        colDiv.setAttribute("style", `flex: 1; height: 80px;`);
+
+                        rowDiv.appendChild(colDiv);
+
+                        colCount++;
+                    }
+                    
+                    gridContainer.appendChild(rowDiv);
+
+                    rowCount++;
+                }
+
+                mouseListener();
+            }
+
+            const createGrid = () => {
+                let rows = parseInt(prompt("What is the size of your grid?", 1));
+                cols = rows;
+                rowCount = 0;
+
+                gridContainer.innerHTML = "";
+                debugger;
+                while (rowCount < rows) {
+                    let rowDiv = document.createElement("div");
+                    let colCount = 0;
+
+                    rowDiv.setAttribute("style", "display: flex;");
+
+                    while (colCount < cols) {
+                        let colDiv = document.createElement("div");
+
+                        colDiv.setAttribute("class", `cell`);
+                        colDiv.setAttribute("style", `flex: 1; height: 80px;`);
+
+                        rowDiv.appendChild(colDiv);
+
+                        colCount++;
+                    }
+                    
+                    gridContainer.appendChild(rowDiv);
+
+                    rowCount++;
+                }
+
+                mouseListener();
+            }
+
+            const mouseListener = () => {
+                let item = document.querySelectorAll(".cell");
+
+                item.forEach((cell)=> {
+                    cell.addEventListener("mouseover", (e) => {
+                        let randR = Math.floor(Math.random() * 255);
+                        let randG = Math.floor(Math.random() * 255);
+                        let randB = Math.floor(Math.random() * 255);
+
+                        e.target.style.backgroundColor = `rgb(${randR}, ${randG}, ${randB})`;
+                    });
+                });
+            };
+        
+            defaultGrid();
+        </script>
+    </body>
+</html>
